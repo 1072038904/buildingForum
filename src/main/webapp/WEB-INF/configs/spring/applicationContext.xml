@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<context:component-scan base-package="com"/>
+	<context:annotation-config />
+	<context:property-placeholder/>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 定义数据源Bean，使用C3P0数据源实现，并注入数据源的必要信息 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		  destroy-method="close"
+		  p:driverClass="com.mysql.jdbc.Driver"
+		  p:jdbcUrl="jdbc:mysql://localhost/forum?useSSL=true"
+		  p:user="root"
+		  p:password="123456"
+		  p:maxPoolSize="40"
+		  p:minPoolSize="2"
+		  p:initialPoolSize="2"
+		  p:maxIdleTime="30"/>
+	<!-- 定义Hibernate的SessionFactory，SessionFactory需要依赖数据源，注入dataSource -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		  p:dataSource-ref="dataSource">
+		<!-- annotatedClasses用来列出全部持久化类 -->
+		<property name="annotatedClasses">
+			<list>
+				<value>com.model.Account</value>
+				<value>com.model.Board</value>
+				<value>com.model.PostContent</value>
+				<value>com.model.Comment</value>
+				<value>com.model.Post</value>
+				<value>com.model.Section</value>
+				<value>com.model.ThumbUp</value>
+				<value>com.model.UserInfor</value>
+				<value>com.model.Notice</value>
+			</list>
+		</property>
+		<!-- 定义Hibernate SessionFactory的属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- 指定Hibernate的连接方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.jdbc.batch_size">100</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.connection.useUnicode">true</prop>
+				<prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+				<prop key="hibernate.cache.provider_configuration_file_resource_path">/ehcache.xml</prop>
+				<prop key="hibernate.hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				<prop key="hibernate.cache.use_query_cache">false</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+				<prop key="hibernate.connection.username">root</prop>
+				<prop key="hibernate.connection.password">123456</prop>
+				<prop key="hibernate.connection.url">jdbc:mysql://localhost/test</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- 配置Hibernate的局部事务管理器，使用HibernateTransactionManager类 -->
+	<!-- 该类是PlatformTransactionManager接口针对采用Hibernate的特定实现类 -->
+	<!-- 配置HibernateTransactionManager需依赖注入SessionFactory -->
+	<bean id="transactionManager"
+		  class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		  p:sessionFactory-ref="sessionFactory"/>
+
+
+
+</beans>

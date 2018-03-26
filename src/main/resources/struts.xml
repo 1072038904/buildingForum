@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<!-- START SNIPPET: xworkSample -->
+<struts>
+    <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.DefaultActionMapper"></constant>
+
+    <constant name="struts.il8n.encoding" value="UTF-8"></constant>
+
+    <!-- <constant name="struts.action.extension" value="action"></constant>-->
+
+    <constant name="struts.configuration.xml.reload" value="true"></constant>
+
+    <constant name="struts.devMode" value="true"></constant>
+
+    <constant name="structs.objectFactory" value="spring"></constant>
+
+    <constant name="struts.convention.default.parent.package" value="convention-default" />
+
+    <constant name="struts.convention.action.packages" value="com" />
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <package name="default" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <interceptors>
+            <interceptor name="depInterceptor" class="com.interceptor.department.DepInterceptor"></interceptor>
+            <interceptor name="depInterceptor2" class="com.interceptor.department.DepInterceptor2"></interceptor>
+
+            <interceptor-stack name="mydefault">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="depInterceptor" />
+            </interceptor-stack>
+        </interceptors>
+
+        <action name="isvalid" class="com.action.AccountManage.LoginAction"
+                method="Login">
+            <result name="success">index.jsp</result>
+            <result name="error">/login.jsp</result>
+        </action>
+
+        <!--     <action name="EmpAction_*" method="{1}" class="com.action.employee.EmpAction">
+         <result name="save">/save.jsp</result>
+       <interceptor-ref name="depInterceptor"></interceptor-ref>
+         <interceptor-ref name="depInterceptor2"></interceptor-ref>
+       </action>
+
+       <action name="DepAction_*" method="{1}" class="com.action.department.DepAction">
+         <result name="save">/save.jsp</result>
+  <interceptor-ref name="depInterceptor"></interceptor-ref>
+         <interceptor-ref name="depInterceptor2"></interceptor-ref>
+       </action>
+
+    <action name="Login_*" method="{1}" class="loginAction">
+        <result name="add">/save.jsp</result>
+       </action> -->
+
+    </package>
+
+</struts>

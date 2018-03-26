@@ -1,0 +1,242 @@
+body {
+  margin: 0;
+  background-color: #fcfaf0;
+  font-style: 12px; }
+
+.none {
+  display: none; }
+
+.dashed {
+  border-bottom: 1px dashed #ccc; }
+
+.head {
+  position: relative;
+  height: 90px;
+  width: 100%; }
+
+.headimg {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 25%; }
+
+.loginsec, .haslogin {
+  float: left;
+  font-style: normal;
+  font-variant-ligatures: normal;
+  font-variant-caps: normal;
+  font-variant-numeric: normal;
+  font-variant-east-asian: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: Tahoma, "Microsoft Yahei", Simsun;
+  position: absolute;
+  right: 26%;
+  height: 60px;
+  top: 20px; }
+
+.loginsec {
+  width: 374px; }
+
+.username, .password {
+  width: 45px; }
+
+.username, .refundpass, .password, .autologin, .register {
+  display: inline-block; }
+
+.refundpass, .register {
+  cursor: pointer; }
+  .refundpass:hover, .register:hover {
+    color: #c81623; }
+
+.password, .passtext, .loginin, .register {
+  margin-top: 10px; }
+
+.usernametext, .passtext {
+  border: 1px solid;
+  border-color: #848484 #E0E0E0 #E0E0E0 #848484;
+  background: #FFF;
+  padding: 2px 4px;
+  line-height: 17px; }
+
+.loginin {
+  width: 72px; }
+
+.loginin, .autologin {
+  margin-right: 5px; }
+
+.refundpass, .register {
+  border-left: 2px solid #ddd;
+  padding: 5px 0px 5px 8px; }
+
+.register {
+  font-weight: bold; }
+
+.haslogin {
+  width: 254px;
+  line-height: 34px; }
+
+.displayusername, .displayxiaoxi, .displayshu, .exit, .displayjifen, .displaycredit, .jifennum, .credit {
+  display: inline-block;
+  font-size: 12px;
+  vertical-align: middle;
+  height: 50%;
+  line-height: 33px; }
+
+.displayusername, .displayxiaoxi, .displayshu, .exit, .jifennum, .credit {
+  font-weight: 700; }
+
+.displayshu {
+  font-size: 12px;
+  color: #aaa; }
+
+.tubiao2 {
+  display: inline-block;
+  font-size: 12px;
+  height: 50%;
+  vertical-align: middle;
+  line-height: 33px; }
+
+.displayjifen {
+  margin-left: 73px; }
+
+.displayjifen, .displaycredit, .displayusername, .displayxiaoxi, .exit {
+  cursor: pointer; }
+  .displayjifen:hover, .displaycredit:hover, .displayusername:hover, .displayxiaoxi:hover, .exit:hover {
+    text-decoration: underline; }
+
+.search {
+  font-size: 0px;
+  position: relative;
+  height: 42px;
+  width: 50%;
+  left: 25%;
+  padding-bottom: 3px;
+  border-bottom: 1px solid orange; }
+
+.neirong {
+  outline: none;
+  margin: 7px 0px 7px 7px;
+  padding: 2px 7px;
+  height: 22px;
+  width: 270px; }
+
+.sel {
+  display: inline-block;
+  height: 30px;
+  width: 80px;
+  outline: none;
+  padding: 2px 7px 4px 7px;
+  border-left-width: 0; }
+
+.sousuobutton {
+  display: inline-block;
+  cursor: pointer;
+  padding: 2px 4px 4px 6px;
+  border: 0;
+  outline: none;
+  background-color: #237ab8;
+  border-radius: 4px;
+  margin: 0 0 0 7px; }
+
+.resou {
+  margin-left: 10px;
+  position: relative;
+  font-size: 14px; }
+
+.resou, .shou, .ti {
+  display: inline-block;
+  margin-left: 5px; }
+
+.shou {
+  font-weight: 600; }
+
+.ti {
+  cursor: pointer; }
+  .ti:hover {
+    text-decoration: underline; }
+
+.mainbody {
+  position: relative;
+  width: 50%;
+  left: 25%;
+  height: auto; }
+
+.tongji {
+  position: relative;
+  height: 33px;
+  color: #aaa;
+  border-bottom: 1px solid orange; }
+
+.tubiao, .today, .todaynum, .yester, .yesternum, .all, .allnum {
+  display: inline-block;
+  font-size: 12px;
+  height: 100%;
+  vertical-align: middle;
+  line-height: 33px; }
+
+.todaynum, .yesternum, .allnum {
+  color: #000;
+  font-weight: 600; }
+
+.tongji {
+  vertical-align: middle; }
+
+.boardheader {
+  color: #CA4312;
+  font-weight: 700;
+  line-height: 27px;
+  font-size: 13px;
+  border-bottom: 1px solid orange;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc; }
+
+.boardbodyouter {
+  background-color: #fff;
+  border-bottom: 1px solid orange;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc; }
+
+.boardbodyinner {
+  padding: 0 7px 0px 7px; }
+
+.section {
+  position: relative;
+  display: inline-block;
+  width: 310px;
+  height: 62px;
+  margin-top: 7px; }
+
+.sectionname, .tieshu, .tieshunum, .lastfabiao, .lasttime {
+  display: inline-block;
+  position: absolute;
+  font-size: 12px;
+  font-weight: normal; }
+
+.sectionname {
+  left: 60px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer; }
+  .sectionname:hover {
+    text-decoration: underline; }
+
+.tieshu {
+  left: 60px;
+  bottom: 27px; }
+
+.tieshunum {
+  left: 95px;
+  bottom: 27px; }
+
+.lastfabiao {
+  left: 60px;
+  bottom: 7px; }
+
+.lasttime {
+  right: 75px;
+  bottom: 7px; }
+
+/*# sourceMappingURL=mainpage.css.map */
