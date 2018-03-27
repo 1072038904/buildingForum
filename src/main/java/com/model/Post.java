@@ -41,7 +41,7 @@ public class Post {
     private Set<ThumbUp> thumbUpSet =new HashSet<>();
     //帖子上传的附件
     @OneToMany
-    @JoinColumn(name="annex_id",referencedColumnName = "id")
+    @JoinColumn(name="annex_id")
     private Set<Annex> annexes = new HashSet<>();
     //发帖子的人
     @ManyToOne

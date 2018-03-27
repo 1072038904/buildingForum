@@ -19,5 +19,6 @@
   <mapping class="com.model.Section"/>
   <mapping class="com.model.ThumbUp"/>
   <mapping class="com.model.UserInfor"/>
+  <mapping class="com.model.Annex"/>
  </session-factory>
 </hibernate-configuration>

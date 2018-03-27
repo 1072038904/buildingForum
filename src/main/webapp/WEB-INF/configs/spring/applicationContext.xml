@@ -43,6 +43,7 @@
 				<value>com.model.ThumbUp</value>
 				<value>com.model.UserInfor</value>
 				<value>com.model.Notice</value>
+				<value>com.model.Annex</value>
 			</list>
 		</property>
 		<!-- 定义Hibernate SessionFactory的属性 -->
