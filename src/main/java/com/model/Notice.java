@@ -21,7 +21,9 @@ public class Notice {
     //更新时间
     private Date noticeUpdateDate;
     //附件
-    private Set<String> noticeUploadPaths =new HashSet<>();
+    @OneToMany
+    @JoinColumn(name="annex_id",referencedColumnName = "id")
+    private Set<Annex> annexSet = new HashSet<>();
     //查看状态
     private  boolean isRead;
     @ManyToOne
@@ -75,12 +77,12 @@ public class Notice {
         this.noticeUpdateDate = noticeUpdateDate;
     }
 
-    public Set<String> getNoticeUploadPaths() {
-        return noticeUploadPaths;
+    public Set<Annex> getAnnexSet() {
+        return annexSet;
     }
 
-    public void setNoticeUploadPaths(Set<String> noticeUploadPaths) {
-        this.noticeUploadPaths = noticeUploadPaths;
+    public void setAnnexSet(Set<Annex> annexSet) {
+        this.annexSet = annexSet;
     }
 
     public boolean isRead() {

@@ -27,6 +27,10 @@ public class Post {
     private boolean isValid;
     //贴子查看数量
     private Integer viewNum;
+    //针对部门
+    @OneToMany
+    @JoinColumn(name="")
+    private  Set<Department> departmentSet = new HashSet<>();
     //评论数量
     private Integer commentsnum;
     //日期
