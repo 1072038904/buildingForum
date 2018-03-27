@@ -20,5 +20,7 @@
   <mapping class="com.model.ThumbUp"/>
   <mapping class="com.model.UserInfor"/>
   <mapping class="com.model.Annex"/>
+  <mapping class="com.model.Contacts"/>
+  <mapping class="com.model.Department"/>
  </session-factory>
 </hibernate-configuration>

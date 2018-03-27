@@ -44,6 +44,8 @@
 				<value>com.model.UserInfor</value>
 				<value>com.model.Notice</value>
 				<value>com.model.Annex</value>
+				<value>com.model.Contacts</value>
+				<value>com.model.Department</value>
 			</list>
 		</property>
 		<!-- 定义Hibernate SessionFactory的属性 -->
