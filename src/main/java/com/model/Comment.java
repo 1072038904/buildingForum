@@ -29,7 +29,7 @@ public class Comment {
     @JoinColumn(name="post_id",referencedColumnName = "id")
     private Post post;
     //发表评论的日期
-    private Date date;
+    private Date releaseCommentDate;
     public Account getTargetAccount() {
         return targetAccount;
     }
@@ -38,12 +38,12 @@ public class Comment {
         this.targetAccount = targetAccount;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getReleaseCommentDate() {
+        return releaseCommentDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setReleaseCommentDate(Date releaseCommentDate) {
+        this.releaseCommentDate = releaseCommentDate;
     }
 
     public Integer getId() {

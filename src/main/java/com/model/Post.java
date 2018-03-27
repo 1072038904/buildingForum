@@ -23,7 +23,6 @@ public class Post {
     @ManyToOne
     @JoinColumn(name="section_id",referencedColumnName = "id")
     private Section section;
-
     //贴子是否合法
     private boolean isValid;
     //贴子查看数量
@@ -31,7 +30,7 @@ public class Post {
     //评论数量
     private Integer commentsnum;
     //日期
-    private Date date;
+    private Date postReleaseDate;
     //贴子是否被删除
     private boolean isDelete;
     //赞的数量
@@ -40,6 +39,10 @@ public class Post {
     @OneToMany
     @JoinColumn(name="thumbUp_id",referencedColumnName = "id")
     private Set<ThumbUp> thumbUpSet =new HashSet<>();
+    //帖子上传的附件
+    @OneToMany
+    @JoinColumn(name="annex_id",referencedColumnName = "id")
+    private Set<Annex> annexes = new HashSet<>();
     //发帖子的人
     @ManyToOne
     @JoinColumn(name="account_id",referencedColumnName = "id")
@@ -101,15 +104,37 @@ public class Post {
         this.commentsnum = commentsnum;
     }
 
-    public Date getDate() {
-        return date;
+    public Set<Comment> getComments() {
+        return comments;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
+    public Date getPostReleaseDate() {
+        return postReleaseDate;
+    }
 
+    public void setPostReleaseDate(Date postReleaseDate) {
+        this.postReleaseDate = postReleaseDate;
+    }
+
+    public Integer getThumpUpNum() {
+        return thumpUpNum;
+    }
+
+    public void setThumpUpNum(Integer thumpUpNum) {
+        this.thumpUpNum = thumpUpNum;
+    }
+
+    public Set<ThumbUp> getThumbUpSet() {
+        return thumbUpSet;
+    }
+
+    public void setThumbUpSet(Set<ThumbUp> thumbUpSet) {
+        this.thumbUpSet = thumbUpSet;
+    }
 
     public boolean isDelete() {
         return isDelete;
