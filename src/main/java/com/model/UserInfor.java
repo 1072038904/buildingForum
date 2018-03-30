@@ -15,8 +15,9 @@ public class UserInfor {
     private String sex;
     //业余爱好
     private String hobby;
+    private int postNum;
     //电话
-    private Integer telephone;
+    private String telephone;
     //电子邮件
     private String email;
     //余额
@@ -26,33 +27,23 @@ public class UserInfor {
     //账号等级
     private Integer level;
 
-    public Set<Section> getFavoriteSection() {
-        return favoriteSection;
-    }
-
-    public void setFavoriteSection(Set<Section> favoriteSection) {
-        this.favoriteSection = favoriteSection;
-    }
-
-    public Set<Post> getFavoritePosting() {
-        return favoritePosting;
-    }
-
-    public void setFavoritePosting(Set<Post> favoritePosting) {
-        this.favoritePosting = favoritePosting;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private Account account;
     @ManyToMany
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name="section_id",referencedColumnName = "id")
     private Set<Section> favoriteSection;
+
+    @ManyToMany
+    @JoinTable(name="post_thumbUp")
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name="posting_id",referencedColumnName = "id")
+    private Set<Post> thumbUpPost;
+
     @ManyToMany
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name="posting_id",referencedColumnName = "id")
     private Set<Post> favoritePosting;
+    @OneToOne
+    private Account account;
     public Integer getId() {
         return id;
     }
@@ -77,11 +68,11 @@ public class UserInfor {
         this.hobby = hobby;
     }
 
-    public Integer getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
@@ -115,6 +106,38 @@ public class UserInfor {
 
     public void setLevel(Integer level) {
         this.level = level;
+    }
+
+    public Set<Post> getThumbUpPost() {
+        return thumbUpPost;
+    }
+
+    public void setThumbUpPost(Set<Post> thumbUpPost) {
+        this.thumbUpPost = thumbUpPost;
+    }
+
+    public Set<Section> getFavoriteSection() {
+        return favoriteSection;
+    }
+
+    public void setFavoriteSection(Set<Section> favoriteSection) {
+        this.favoriteSection = favoriteSection;
+    }
+
+    public Set<Post> getFavoritePosting() {
+        return favoritePosting;
+    }
+
+    public void setFavoritePosting(Set<Post> favoritePosting) {
+        this.favoritePosting = favoritePosting;
+    }
+
+    public int getPostNum() {
+        return postNum;
+    }
+
+    public void setPostNum(int postNum) {
+        this.postNum = postNum;
     }
 
     public Account getAccount() {

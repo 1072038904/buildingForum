@@ -1,6 +1,8 @@
 package com.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,7 +23,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name="targetAccount_id",referencedColumnName = "id")
     private Account targetAccount;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="account_id",referencedColumnName = "id")
     private Account account;
     //评论对应的帖子
@@ -29,7 +31,7 @@ public class Comment {
     @JoinColumn(name="post_id",referencedColumnName = "id")
     private Post post;
     //发表评论的日期
-    private Date releaseCommentDate;
+    private Date date;
     public Account getTargetAccount() {
         return targetAccount;
     }
@@ -38,12 +40,12 @@ public class Comment {
         this.targetAccount = targetAccount;
     }
 
-    public Date getReleaseCommentDate() {
-        return releaseCommentDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setReleaseCommentDate(Date releaseCommentDate) {
-        this.releaseCommentDate = releaseCommentDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Integer getId() {

@@ -275,7 +275,7 @@ public class PostController {
     @ResponseBody
     public List<Post> recommond(@RequestBody Map<String,Object> request){
         //参数是当前登录用户的userInfor 实体
-        Post post  = postService.recommendPost("");
+        //Post post  = postService.recommendPost("");
 
         return null;
     }

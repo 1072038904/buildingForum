@@ -2,10 +2,10 @@ package com.service.SectionManage.imple;
 
 import com.dao.SectionManage.SectionDao;
 import com.model.Account;
-import com.model.Board;
+import com.model.Post;
 import com.model.Section;
+import com.model.UserInfor;
 import com.service.SectionManage.SectionService;
-import com.service.common.BaseService;
 import com.service.common.imple.BaseServiceImple;
 import com.util.PageBean;
 import org.springframework.stereotype.Service;
@@ -44,6 +44,43 @@ public class SectionServiceImple extends BaseServiceImple<Section> implements Se
         pageBean.setList(resultList);
         return pageBean;
     }
+    @Override
+    public void addViewNum(int postId) {
+        Section section=sectionDao.findEntityById(postId,Section.class);
+        section.setReadNum(section.getReadNum()+1);
+        sectionDao.addViewNum(section);
+    }
 
+    @Override
+    public void updateUserFav(UserInfor userInfor) {
+        sectionDao.updateUserFav(userInfor);
+    }
 
+    @Override
+    public Section getSectionById(int sectionId) {
+        return sectionDao.findEntityById(sectionId,Section.class);
+    }
+    @Override
+    public List<Section> fuzzyQuerySectionByName(String sectionNmae) {
+        List <Section> resultList = sectionDao.find("from Section as a where a.sectionName like '%"+sectionNmae+"%'");
+        return resultList;
+    }
+
+    @Override
+    public int getPostNum(int sectionId) {
+        return sectionDao.getPostNum(sectionId);
+    }
+
+    @Override
+    public List<Post> getPostBySectionIdAndPage(int sectionId, int page, int num) {
+        int total=getPostNum(sectionId);
+        int start=(page-1)*num,nums;
+        if(total>=page*num){
+            nums=num;
+        }
+        else{
+            nums=total-(page-1)*num;
+        }
+        return sectionDao.getPostBysectionIdAndPage(sectionId,start,nums);
+    }
 }

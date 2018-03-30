@@ -29,5 +29,5 @@ void deleteObByCommodity(Class<T> entityClazz, String Commodity_id);
 /*
 模糊查询参数绑定通用
  */
-PageBean fuzzyQueryNameByAccount(Account account,Class<T> entityClazz,String key,Integer currentPage,Integer pageSozeq);
+PageBean fuzzyQueryNameByAccount(Account account, Class<T> entityClazz, String key, Integer currentPage, Integer pageSozeq);
 }

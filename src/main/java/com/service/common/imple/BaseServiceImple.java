@@ -1,15 +1,19 @@
 package com.service.common.imple;
 
-import java.util.List;
-
 import com.dao.common.BaseDao;
+import com.model.Account;
 import com.service.common.BaseService;
 import com.util.GeneratedHql;
 import com.util.PageBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
-import com.model.Account;
+
+import java.util.List;
 @Transactional
 public class BaseServiceImple <T>implements BaseService<T> {
+	@Autowired
+	@Qualifier("baseDaoHibernate4")
 	private BaseDao<T> baseDao;
 	public BaseServiceImple() {
 		// TODO Auto-generated constructor stub
@@ -114,13 +118,8 @@ public class BaseServiceImple <T>implements BaseService<T> {
 	public T findEnetityById(Integer id,Class<T> entityClazz) {
 		// TODO Auto-generated method stub
 		//System.out.println("from "+entityClazz.getSimpleName()+" as a a.account.account ='"+account.getAccount()+"'");
-		List<T> ple=baseDao.find("from "+entityClazz.getSimpleName()+" where id ='"+id.toString()+"'");
-		for(Object ele:ple){
-			@SuppressWarnings("unchecked")
-			T t=(T)ele;
-			return t;
-		}
-		return null;
+		T entity=findEnetityById(id,entityClazz);
+		return entity;
 	}
 
 	@Override

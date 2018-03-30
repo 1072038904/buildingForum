@@ -1,9 +1,7 @@
 package com.model;
 
 import javax.persistence.*;
-import com.model.Post;
-import javafx.geometry.Pos;
-
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,15 +13,15 @@ public class Section {
     //帖子分类名
     private String sectionName;
     //板块帖子最后上交时间
-    private String lastHandUp;
+    private Date lastHandUp;
     //板块阅读人数
     private Integer readNum;
     //帖子的数量
     private Integer postNum;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="board_id",referencedColumnName = "id")
     private Board board;
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="section")
     private Set<Post> postSet=new HashSet<>();
     public Integer getId() {
         return id;
@@ -41,9 +39,6 @@ public class Section {
         this.sectionName = sectionName;
     }
 
-    public String getLastHandUp() {
-        return lastHandUp;
-    }
 
     public Integer getReadNum() {
         return readNum;
@@ -77,7 +72,11 @@ public class Section {
         this.postSet = postSet;
     }
 
-    public void setLastHandUp(String lastHandUp) {
+    public Date getLastHandUp() {
+        return lastHandUp;
+    }
+
+    public void setLastHandUp(Date lastHandUp) {
         this.lastHandUp = lastHandUp;
     }
 }

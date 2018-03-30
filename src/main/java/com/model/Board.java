@@ -1,8 +1,7 @@
 package com.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Board {
@@ -11,8 +10,8 @@ public class Board {
     public Integer id;
     //板块名字
     public String boardName;
-    @OneToMany
-    private Set<Section> sections =new HashSet<Section>();
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="board")
+    private List<Section> sections;
 
     public Integer getId() {
         return id;
@@ -28,5 +27,13 @@ public class Board {
 
     public void setBoardName(String boardName) {
         this.boardName = boardName;
+    }
+
+    public List<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 }

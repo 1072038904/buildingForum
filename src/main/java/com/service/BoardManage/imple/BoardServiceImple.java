@@ -3,7 +3,6 @@ package com.service.BoardManage.imple;
 import com.dao.BoardManage.BoardDao;
 import com.model.Account;
 import com.model.Board;
-import com.model.Section;
 import com.service.BoardManage.BoardService;
 import com.service.common.imple.BaseServiceImple;
 import com.util.PageBean;

@@ -10,5 +10,5 @@ public interface BoardService extends BaseService<Board> {
     /*
     获取所有board以及board下属的section信息不需要post信息
     * */
-    PageBean obtainAllBoardOfSection(Integer currentPage,Integer pageSize);
+    PageBean obtainAllBoardOfSection(Integer currentPage, Integer pageSize);
 }
