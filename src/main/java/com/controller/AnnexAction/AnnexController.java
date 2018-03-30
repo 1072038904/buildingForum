@@ -1,78 +1,73 @@
 package com.controller.AnnexAction;
 
+import com.model.Annex;
+import com.service.AnnexManage.AnnexService;
 import com.util.FileOperateUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/annex")
 public class AnnexController {
-/*
-文件接收
-* */
-@RequestMapping(value="upload")
-public String upload(HttpServletRequest request){
-    init(request);
-    try {
-        FileOperateUtil.upload(request);
-        request.setAttribute("msg", "ok");
-        request.setAttribute("map", getMap());
-    } catch (Exception e) {
-        e.printStackTrace();
+    private AnnexService annexService;
+    /**
+     * 文件上传功能
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value="/upload",method= RequestMethod.POST)
+    @ResponseBody
+    public String upload(MultipartFile file, HttpServletRequest request) throws IOException{
+        String path = request.getSession().getServletContext().getRealPath("upload");
+        String fileName = file.getOriginalFilename();
+        File dir = new File(path,fileName);
+        Annex annex = new Annex();
+        annex.setAnnexPath(path);
+        annex.setAnnexName(fileName);
+        annexService.saveNewEntity(annex);
+        return "ok!";
     }
-    return "redirect:list";
-}
-    @RequestMapping(value="list")
-    public ModelAndView list(HttpServletRequest request){
-        init(request);
-        request.setAttribute("map", getMap());
-        return new ModelAndView("fileOperate/list");
-    }
-    @RequestMapping(value="download")
-    public void download(HttpServletRequest request, HttpServletResponse response){
-        init(request);
-        try {
-            String downloadfFileName = request.getParameter("filename");
-            downloadfFileName = new String(downloadfFileName.getBytes("iso-8859-1"),"utf-8");
-            String fileName = downloadfFileName.substring(downloadfFileName.indexOf("_")+1);
-            String userAgent = request.getHeader("User-Agent");
-            byte[] bytes = userAgent.contains("MSIE") ? fileName.getBytes() : fileName.getBytes("UTF-8");
-            fileName = new String(bytes, "ISO-8859-1");
-            response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", fileName));
-            FileOperateUtil.download(downloadfFileName, response.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    /**
+     * 文件下载功能
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/down")
+    public void down(@RequestBody Map<String,Integer> re,HttpServletRequest request, HttpServletResponse response) throws Exception{
+        Annex annex = annexService.findEnetityById(re.get("annexId"),Annex.class);
+        //模拟文件，myfile.txt为需要下载的文件
+        String fileName =annex.getAnnexPath();
+        //获取输入流
+        InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
+        //假如以中文名下载的话
+        String filename = "下载文件.txt";
+        //转码，免得文件名中文乱码
+        filename = URLEncoder.encode(filename,"UTF-8");
+        //设置文件下载头
+        response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
+        response.setContentType("multipart/form-data");
+        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+        int len = 0;
+        while((len = bis.read()) != -1){
+            out.write(len);
+            out.flush();
         }
+        out.close();
     }
-    private void init(HttpServletRequest request) {
-        if(FileOperateUtil.FILEDIR == null){
-            FileOperateUtil.FILEDIR = request.getSession().getServletContext().getRealPath("/") + "file/";
-        }
-    }
-    private Map<String, String> getMap(){
-        Map<String, String> map = new HashMap<String, String>();
-        File[] files = new File(FileOperateUtil.FILEDIR).listFiles();
-        if(files != null){
-            for (File file : files) {
-                if(file.isDirectory()){
-                    File[] files2 = file.listFiles();
-                    if(files2 != null){
-                        for (File file2 : files2) {
-                            String name = file2.getName();
-                            map.put(file2.getParentFile().getName() + "/" + name, name.substring(name.lastIndexOf("_")+1));
-                        }
-                    }
-                }
-            }
-        }
-        return map;
-    }
+
 }
